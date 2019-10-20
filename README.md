@@ -1,4 +1,4 @@
-# MontyHallProblem
+# Monty Hall Problem
 Simple Simulation of the Monty Hall Problem
 
 ## Video Inspiration
@@ -8,7 +8,6 @@ Simple Simulation of the Monty Hall Problem
 ![](https://raw.githubusercontent.com/BlueZeta/MontyHallProblem/master/readme/chart.png)
 
 ## Installation 
-    python -m pip install -U pip
     python -m pip install -U matplotlib
     
 ## How to use
