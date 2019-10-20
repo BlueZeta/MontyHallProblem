@@ -4,102 +4,74 @@ from matplotlib import pyplot as plt
 
 def main():
     # Variables
-    round = 0
     keep = 0
-    keep_tally = 0
     other_tally = 0
-    other = 0
-    original_choice = 0
+    original_tally = 0
     Doors = []
 
     # other choice percentage
-    something = []
-    # number of simulations
-    anything = []
-    # kept choice percentage
-    nothing = []
+    otherArray = []
     # original choice percentage
-    nothing = []
+    originalArray = []
 
-    number = input("How many simulations do you want? ")
+    number = input("What is the max number of simulations you want? ")
     size = input("What is the size of your array? ")
+
+    # parsing string to integer
+    number = int(number)
+    size = int(size)
 
     beginTime = time.time()
 
     # goes through the number of simulations
-    for y in range(1, number):
+    for y in range(1,number):
 
         # adds the number of goats by one less than the the input variable size 
         for x in range(size - 1):
             Doors.append("goat")
-
+            
         Doors.append("car")
 
         # Number of Tests
-        for i in xrange(0, y):
-            round += 1
-            # print("######## Test number " + str(round) + "########")
+        for i in range(0, y):
+
             random.shuffle(Doors)
+
             # randomly chooses a number to pick from
             choice = random.randrange(size)
             # the player's pick
             pick = Doors[choice]
-            # counts the number of times the player choose right the first time
-            if Doors[choice] == "car":
-                original_choice += 1
 
             # remove duplicates except for one car and one goat
             newDoors = Remove(Doors)
             # gets the index of the player's pick
             keep = newDoors.index(pick)
 
-            # assigns a number to other option
-            if keep == 0:
-                other == 1
-            else:
-                other == 0
-
             # adds a tally if the player kept her option and gets it correct
             if newDoors[keep] == "car":
-                keep_tally += 1
+                original_tally += 1
             # adds a tally if the player pick the other option and gets it correct
             else:
                 other_tally += 1
 
-        # original successes
-        os = float(original_choice) * 100 / float(y)
-        # original losses
-        ol = 100 - float(os)
+        # Original Guess Win Percentage
+        originalPercentage = float(original_tally) * 100 / float(y) 
 
-        # keep successes
-        ks = float(keep_tally) * 100 / float(y) 
-        # keep fails
-        kf = 100.0 - float(ks)
+        # Other Guess Win Percentage
+        otherPercentage = float(other_tally) * 100 / float(y)
 
-        # other successes 
-        oss = float(other_tally) * 100 / float(y)
-        # other fails
-        of = 100 - float(oss)
-
-        # print("################ RESULTS #################")
-        # print("Original Guess Successes: %s" %(os))
-        # print("Original Guess Fails: %s" %(ol))
-        # print("------------------------------------------")
-        # print("Keep Guess Successes: %s" %(ks))
-        # print("Keep Guess Fails: %s" %(kf))
-        # print("Other Guess Successes: %s" %(oss))
-        # print("Other Guess Fails: %s" %(of))
+        #print("################ RESULTS #################")
+        #print("Original Guess Win Percentage: %s" %(originalPercentage))
+        #print("Other Guess Win Percentage: %s" %(otherPercentage))
 
         # add data to arrays
-        something.append(oss)
-        anything.append(y)
-        nothing.append(ks)
+        originalArray.append(originalPercentage)
+        otherArray.append(otherPercentage)
 
         # reset
         other_tally = 0
-        keep_tally = 0
-        original_choice = 0
-
+        original_tally = 0
+        Doors.clear()
     
     endTime = time.time()
     
@@ -112,8 +84,9 @@ def main():
     print("Timer - %d:%d:%d" %(hours, minutes, seconds))
 
     # plotting stuff
-    plt.plot(anything, something)
-    plt.plot(nothing)
+    plt.plot(otherArray, label = "Other Guess Win Percentage")
+    plt.plot(originalArray, label = "Original Guess Win Percentage")
+    plt.legend(loc = "upper right")
     plt.xlabel("Number of simulations")
     plt.ylabel("Success rate")
     plt.title("Monty Python Problem")
