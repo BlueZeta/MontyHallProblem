@@ -12,4 +12,4 @@ Simple Simulation of the Monty Hall Problem
     python -m pip install -U matplotlib
     
 ## How to use
-    python montyHall.py
+    python3 montyHall.py
