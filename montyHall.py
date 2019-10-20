@@ -2,9 +2,6 @@ import random
 import time
 from matplotlib import pyplot as plt
 
-# based on this youtube video
-# https://www.youtube.com/watch?v=4Lb-6rxZxx0
-
 def main():
     # Variables
     round = 0
@@ -103,8 +100,10 @@ def main():
         keep_tally = 0
         original_choice = 0
 
-    # https://stackoverflow.com/questions/27779677/how-to-format-elapsed-time-from-seconds-to-hours-minutes-seconds-and-milliseco
+    
     endTime = time.time()
+    
+    # time conversions
     timer = endTime - beginTime
     hours = timer//3600
     timer = timer - 3600*hours
